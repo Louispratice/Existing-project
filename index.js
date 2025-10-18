@@ -1,7 +1,15 @@
-const express = require ("express");
-const mongoose = require("mongoose");
-const bodyParser = require ("body-parser");
-const app = express ()
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+
+import userRoutes from './routes/users.js';
+
+const app = express();
+const Port = 3000;
+
+app.use(bodyParser.json());
+
+app.use('/users', userRoutes);
 
 
 
@@ -12,12 +20,6 @@ app.get("/", (req,res) => {
 });   
 
 
-app.post('/api/products',(req,res) =>{
-  console.log(req.body);
-res.send(req.body);
-});
-
-
 mongoose.connect("mongodb+srv://blessedlouistechnologylimited_db_user:ZTIPbpQCkayqchpO@cluster0.o1m77pn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 .then(() => {
     console.log("Louis database is connected");
@@ -25,7 +27,4 @@ mongoose.connect("mongodb+srv://blessedlouistechnologylimited_db_user:ZTIPbpQCka
 app.listen(3000, () => {
     console.log("server is running on port 3000");
 });
-
-
-
 
